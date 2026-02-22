@@ -8,9 +8,14 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center bg-background px-6"
+      className="relative min-h-screen flex items-center justify-center bg-background px-6 overflow-hidden"
     >
-      <div className="max-w-3xl mx-auto text-center">
+      {/* Subtle background effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/[0.04] blur-[100px]" />
+      </div>
+      <div className="relative max-w-3xl mx-auto text-center">
         <motion.p
           className="text-sm tracking-widest uppercase text-muted-foreground mb-4"
           initial={{ opacity: 0, y: 20 }}

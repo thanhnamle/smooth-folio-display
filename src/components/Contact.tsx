@@ -1,5 +1,28 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react";
+
+const contactLinks = [
+  {
+    label: "Email",
+    href: "mailto:johndoe@email.com",
+    icon: Mail,
+    detail: "johndoe@email.com",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com",
+    icon: Github,
+    detail: "github.com/johndoe",
+    external: true,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com",
+    icon: Linkedin,
+    detail: "linkedin.com/in/johndoe",
+    external: true,
+  },
+];
 
 const Contact = () => {
   return (
@@ -12,11 +35,11 @@ const Contact = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          Get in Touch
+          Let's Build Something Together
         </motion.h2>
 
         <motion.p
-          className="text-muted-foreground mb-10 max-w-md mx-auto leading-relaxed"
+          className="text-muted-foreground mb-12 max-w-md mx-auto leading-relaxed"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -27,37 +50,39 @@ const Contact = () => {
         </motion.p>
 
         <motion.div
-          className="flex items-center justify-center gap-6"
-          initial={{ opacity: 0, y: 16 }}
+          className="rounded-2xl border border-border bg-card p-8 sm:p-10 shadow-[var(--card-shadow)] max-w-lg mx-auto"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <a
-            href="mailto:johndoe@email.com"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors duration-200"
-          >
-            <Mail size={16} />
-            Email
-          </a>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors duration-200"
-          >
-            <Github size={16} />
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border text-sm font-medium text-foreground hover:bg-muted transition-colors duration-200"
-          >
-            <Linkedin size={16} />
-            LinkedIn
-          </a>
+          <div className="space-y-4">
+            {contactLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noopener noreferrer" : undefined}
+                className="group flex items-center gap-4 rounded-xl px-5 py-4 transition-all duration-200 hover:bg-muted"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-muted text-foreground transition-colors duration-200 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <link.icon size={18} />
+                </div>
+                <div className="flex-1 text-left">
+                  <span className="text-sm font-semibold text-foreground block leading-tight">
+                    {link.label}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {link.detail}
+                  </span>
+                </div>
+                <ArrowUpRight
+                  size={16}
+                  className="text-muted-foreground opacity-0 -translate-x-1 translate-y-1 transition-all duration-200 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0"
+                />
+              </a>
+            ))}
+          </div>
         </motion.div>
 
         <motion.p

@@ -36,10 +36,9 @@
 
     --radius: 0.75rem;
 
-    /* Custom portfolio tokens */
     --splash-bg: 220 20% 7%;
     --splash-foreground: 0 0% 96%;
-    --section-alt: 0 0% 100%;
+    --section-alt: 220 14% 94%;
     --nav-blur: rgba(246, 247, 249, 0.72);
     --card-shadow: 0 2px 20px -4px rgba(0, 0, 0, 0.06);
     --card-hover-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.12);
@@ -53,11 +52,60 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  .dark {
+    --background: 220 16% 10%;
+    --foreground: 220 10% 90%;
+
+    --card: 220 16% 13%;
+    --card-foreground: 220 10% 90%;
+
+    --popover: 220 16% 13%;
+    --popover-foreground: 220 10% 90%;
+
+    --primary: 220 60% 60%;
+    --primary-foreground: 220 20% 7%;
+
+    --secondary: 220 14% 18%;
+    --secondary-foreground: 220 10% 85%;
+
+    --muted: 220 14% 16%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 220 50% 55%;
+    --accent-foreground: 220 20% 7%;
+
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 18%;
+    --input: 220 14% 18%;
+    --ring: 220 60% 60%;
+
+    --splash-bg: 220 20% 5%;
+    --splash-foreground: 0 0% 92%;
+    --section-alt: 220 16% 12%;
+    --nav-blur: rgba(20, 22, 28, 0.72);
+    --card-shadow: 0 2px 20px -4px rgba(0, 0, 0, 0.3);
+    --card-hover-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.4);
+
+    --sidebar-background: 220 16% 10%;
+    --sidebar-foreground: 220 10% 85%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 220 16% 10%;
+    --sidebar-accent: 220 14% 16%;
+    --sidebar-accent-foreground: 220 10% 85%;
+    --sidebar-border: 220 14% 18%;
+    --sidebar-ring: 220 60% 60%;
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
+    transition-property: color, background-color, border-color, box-shadow;
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   html {
@@ -68,6 +116,19 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
+}
+
+/* Grain texture overlay */
+.grain-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
 }
 
 @layer utilities {

@@ -7,6 +7,7 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import ScrollProgress from "@/components/ScrollProgress";
 import BackToTop from "@/components/BackToTop";
+import AmbientBackground from "@/components/AmbientBackground";
 
 const Index = () => {
   const [splashDone, setSplashDone] = useState(false);
@@ -16,14 +17,15 @@ const Index = () => {
   }, []);
 
   return (
-    <>
+    <div className="grain-overlay">
       {!splashDone && <Splash onComplete={handleSplashComplete} />}
       {splashDone && (
         <>
+          <AmbientBackground />
           <Navbar />
           <ScrollProgress />
           <BackToTop />
-          <main>
+          <main className="relative z-10">
             <Hero />
             <Skills />
             <Projects />
@@ -31,7 +33,7 @@ const Index = () => {
           </main>
         </>
       )}
-    </>
+    </div>
   );
 };
 
